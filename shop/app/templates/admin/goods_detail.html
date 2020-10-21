@@ -1,0 +1,54 @@
+{% extends "admin/common.html" %}
+{% block content %}
+<table width="1280" height="288"  border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+  <tr>
+
+    <td align="center" valign="top"><table width="100%"  border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="18" height="45" align="right">&nbsp;</td>
+        <td colspan="3" class="tableBorder_B_dashed">
+          <img src="{{url_for('static',filename='admin/images/manage_ico1.GIF')}}" width="11" height="11">&nbsp;
+          <a href="{{url_for('admin.supercat_list')}}"> [大分类信息管理]</a>&nbsp;&nbsp;&nbsp;
+          <img src="{{url_for('static',filename='admin/images/manage_ico2.GIF')}}" width="11" height="11">&nbsp;
+          <a href="{{url_for('admin.subcat_list')}}">[小分类信息管理]</a>&nbsp;&nbsp;&nbsp;
+          <img src="{{url_for('static',filename='admin/images/manage_ico3.GIF')}}" width="12" height="12">&nbsp;
+          <a href="{{url_for('admin.goods_add')}}">[添加商品信息]</a></td>
+        <td width="24">&nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td align="right">&nbsp;</td>
+        <td height="10" colspan="3">&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="29" align="right">&nbsp;</td>
+        <td width="10" background="{{url_for('static',filename='admin/images/manage_leftTitle_left.GIF')}}">&nbsp;</td>
+        <td width="989" align="center" background="{{url_for('static',filename='admin/images/manage_leftTitle_mid.GIF')}}" class="word_white"><b>商品列表</b></td>
+        <td width="10" background="{{url_for('static',filename='admin/images/manage_leftTitle_right.GIF')}}">&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+      <table width="96%" height="153"  cellpadding="0" cellspacing="0" border="1" bordercolor="#FFFFFF" bordercolordark="#FFFFFF" bordercolorlight="#E6E6E6" style="padding:5px;">
+        <tr>
+          <td width="37%" height="95" rowspan="4" align="center">
+            <img src="{{url_for('static',filename='images/goods/'+goods.picture)}}" width="240" height="160" class="tableBorder_l">
+          </td>
+          <td width="63%" height="40">{{goods.name}}</td>
+        </tr>
+        <tr>
+          <td height="40">现价：{{ goods.current_price}}(元) </td>
+        </tr>
+        <tr>
+          <td height="40">{{ goods.introduction}}</td>
+        </tr>
+        <tr>
+          <td height="40">
+            <button class="btn_bg_short" onClick="history.back(-1);" >返回</button>
+          </td>
+        </tr>
+      </table>
+</td>
+
+
+{% endblock %}

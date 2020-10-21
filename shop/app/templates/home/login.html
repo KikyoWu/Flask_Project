@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>登录-51商城</title>
+<link rel="stylesheet" href="{{url_for('static',filename='home/css/mr-01.css')}}" type="text/css">
+</head>
+<body>
+	<div id="mr-mainbody" class="container mr-mainbody">
+		<div class="row">
+			<!-- 主体内容 -->
+			<div id="mr-content" class="mr-content col-xs-12">
+				<div class="login-wrap" style="margin-bottom: 60px; margin-top: 50px">
+					<div style="max-width: 540px; margin: 0 auto;">
+						<a href="index.html" title="点击返回首页"><img src="{{url_for('static',filename='home/images/51logo.png')}}"></a>
+					</div>
+					<div class="login">
+						<div class="page-header" style="pause: 0px;"> <h1 class="login_h1">会员登录</h1> </div>
+						    {% for msg in get_flashed_messages(category_filter=["err"]) %}
+								<div style="color:red;text-align:center;font-size:16px">
+								  	{{ msg }}
+								</div>
+							{% endfor %}
+						<!-- 会员登录表单 -->
+						<form action="" method="post" class="form-horizontal">
+							<fieldset>
+								<div class="form-group">
+									<div class="col-sm-4 control-label">
+										<label id="username-lbl" for="username" class="required">账户 ：</label>
+									</div>
+									<div class="col-sm-8">
+										<!-- 账户文本框 -->
+										{{form.username}}
+										{% for err in form.username.errors %}
+										<span class="error">{{ err }}</span>
+										{% endfor %}
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-4 control-label">
+										<label id="password" for="password" class="required">密码 ：</label>
+									</div>
+									<div class="col-sm-8">
+										<!-- 密码文本框 -->
+										{{form.password}}
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-4 control-label">
+										<label id="password-lbl" for="password" class="required">验证码 ：</label>
+									</div>
+									<div class="col-sm-8" style="clear: none;">
+										<!-- 验证码文本框 -->
+										{{form.verify_code}}
+											<!-- 显示验证码 -->
+											<img class="img_checkcode" src="{{url_for('home.get_code')}}" width="116"
+	 											height="43" onclick="this.src='{{url_for('home.get_code')}}'+'?'+ Math.random()">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-4 col-sm-8">
+										{{form.csrf_token}}
+										{{form.submit}}
+									</div>
+								</div>
+								<div class="form-group"
+									style="border-top: 1px solid #D9D9D9; margin: 20px;">
+									<label
+										style="float: right; color: #858585; margin-right: 40px; margin-top: 10px; font-size: 14px;">没有账户？<a
+										href="{{url_for('home.register')}}">立即注册</a></label>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-- //主体内容 -->
+		</div>
+	</div>
+</body>
+</html>

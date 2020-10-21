@@ -1,0 +1,91 @@
+{% extends "admin/common.html" %}
+{% block content %}
+<table width="1280" height="288"  border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+  <tr>
+
+    <td align="center" valign="top"><table width="100%"  border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="18" height="45" align="right">&nbsp;</td>
+        <td colspan="3" class="tableBorder_B_dashed">
+          <img src="{{url_for('static',filename='admin/images/manage_ico1.GIF')}}" width="11" height="11">&nbsp;
+          <a href="{{url_for('admin.supercat_list')}}"> [大分类信息管理]</a>&nbsp;&nbsp;&nbsp;
+          <img src="{{url_for('static',filename='admin/images/manage_ico2.GIF')}}" width="11" height="11">&nbsp;
+          <a href="{{url_for('admin.subcat_list')}}">[小分类信息管理]</a>&nbsp;&nbsp;&nbsp;
+          <img src="{{url_for('static',filename='admin/images/manage_ico3.GIF')}}" width="12" height="12">&nbsp;
+          <a href="{{url_for('admin.goods_add')}}">[添加商品信息]</a></td>
+        <td width="24">&nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td align="right">&nbsp;</td>
+        <td height="10" colspan="3">&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="29" align="right">&nbsp;</td>
+        <td width="10" background="{{url_for('static',filename='admin/images/manage_leftTitle_left.GIF')}}">&nbsp;</td>
+        <td width="989" align="center" background="{{url_for('static',filename='admin/images/manage_leftTitle_mid.GIF')}}" class="word_white"><b>商品列表</b></td>
+        <td width="10" background="{{url_for('static',filename='admin/images/manage_leftTitle_right.GIF')}}">&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+     <form action="{{url_for('admin.goods_del',id=goods.id)}}" method="get" name="form1">
+        <table width="94%"  border="0" align="right" cellpadding="-2" cellspacing="-2" bordercolordark="#FFFFFF">
+          <tr>
+            <td width="14%" height="27">&nbsp;商品名称：</td>
+            <td height="27" colspan="3">&nbsp;
+            <input name="ID" type="hidden" id="ID" value="24">
+              {{goods.name}}&nbsp;&nbsp;
+            </td>
+          </tr>
+          <tr>
+            <td height="27">&nbsp;所属大类：</td>
+            <td width="31%" height="27">&nbsp;{{goods.supercat.cat_name}}</td>
+            <td width="13%" height="27"> &nbsp;所属小类：</td>
+            <td width="42%" height="27">&nbsp;{{goods.subcat.cat_name}}</td>
+          </tr>
+          <tr>
+            <td height="16">&nbsp;图片文件：</td>
+            <td height="27" colspan="3">&nbsp;{{goods.picture}}</td>
+          </tr>
+          <tr>
+            <td height="27" align="center">定　　价：</td>
+            <td height="27">&nbsp;{{goods.original_price}}(元)</td>
+            <td height="27" align="center">现&nbsp;&nbsp;&nbsp;&nbsp;价： </td>
+            <td height="27">&nbsp;{{goods.current_price}}(元)</td>
+          </tr>
+          <tr>
+            <td height="45">&nbsp;是否新品：</td>
+            <td>&nbsp;
+                {% if goods.is_new%}
+                    不是新品
+                {% else %}
+                    是新品
+                {% endif %}
+            </td>
+            <td>&nbsp;是否特价：</td>
+            <td>
+                {% if goods.is_sale%}
+                    不是特价商品
+                {% else %}
+                    是特价商品
+                {% endif %}
+            </td>
+          </tr>
+          <tr>
+            <td height="103">&nbsp;商品简介：</td>
+            <td colspan="3"><span class="style5">&nbsp; </span>
+              {{ goods.introduction }}
+          </tr>
+          <tr>
+            <td height="38" colspan="4" align="center">
+                <input name="Submit" type="submit" class="btn_bg_long1" value="确定删除">
+                &nbsp;
+                <input name="Submit3" type="button" class="btn_bg_short" value="返回" onClick="javascript:history.back()">                    </td>
+          </tr>
+        </table>
+      </form>
+    </td>
+
+
+{% endblock %}

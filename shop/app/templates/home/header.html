@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>首页-51商城</title>
+<link rel="stylesheet" href="{{url_for('static',filename='home/css/mr-01.css')}}" type="text/css">
+<script src="{{url_for('static',filename='home/js/jsArr01.js')}}" type="text/javascript"></script>
+<script src="{{url_for('static',filename='home/js/module.js')}}" type="text/javascript"></script>
+<script src="{{url_for('static',filename='home/js/jsArr02.js')}}" type="text/javascript"></script>
+<script src="{{url_for('static',filename='home/js/tab.js')}}" type="text/javascript"></script>
+</head>
+
+<body>
+<div id="toolbar" style="background-color: #F0F0F0; width: 100%;">
+	<div class="container">
+		<div class="row">
+			<div class="toolbar-ct-1">
+				<p>
+					<i class="fa fa-phone"></i>
+					<span style="margin-right: 15px;">电话：400-675-1066</span>
+					{% if "user_id" in session %}
+						您好，{{session['username']}}
+						&nbsp; &nbsp;<a href="{{url_for('home.modify_password')}}">修改</a>&nbsp;&nbsp;
+						|&nbsp;&nbsp;<a href="{{url_for('home.logout')}}">退出</a>
+					{% else %}
+						<a  href="{{url_for('home.login')}}">登录</a>&nbsp; ｜ &nbsp;<a href="{{url_for('home.register')}}">注册</a>
+					{% endif %}
+				</p>
+			</div>
+			<div class="toolbar-ct-2">
+				<a href="{{url_for('home.order_list')}}">我的订单</a>&nbsp;&nbsp; | &nbsp;&nbsp; 我的收藏
+			</div>
+		</div>
+	</div>
+	<div style="background-color: white; width: 100%">
+		<div class="container">
+			<div class="row">
+				<div class="toolbar-ct col-xs-12 col-md-6  hidden-sm hidden-xs">
+					<div class="toolbar-ct-1">
+						<img src="{{url_for('static',filename='home/images/51logo.png')}}">
+					</div>
+					<div>
+						<!-- 搜索条 -->
+						<div class="search_box">
+							<div class="top-nav-search">
+								<form method="get" action="{{url_for('home.goods_search')}}">
+									<input type="text" name="keywords" size="38"
+										style="border: 0px;" class="top-nav-search-input" placeholder="请输入内容" />
+									<button type="submit" class="search_box_img" onFocus="this.blur()">
+										<img src="{{url_for('static',filename='home/images/search.png')}}" alt="">
+									</button>
+								</form>
+							</div>
+						</div>
+						<!-- //搜索条 -->
+					</div>
+				</div>
+				<div class="toolbar-ct toolbar-ct-right col-xs-12 col-md-3">
+					<div class="toolbar-ct-2 "
+						style="margin-top: 35px; border: 1px solid #EAEAEA; padding: 5px;">
+						<a href="{{url_for('home.shopping_cart')}}" style="color: #E33737; font-size: 20px;"><i
+							class="fa fa-cart1"></i> 我的购物车</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 网站头部 -->
+<header id="mr-header" class="wrap mr-header">
+	<div class="container">
+		<div class="row">
+			<!-- //网站Logo -->
+			<!-- 主导航条 -->
+			<nav id="mr-mainnav"
+				class="col-xs-12 col-md-6 mr-mainnav navbar navbar-default">
+				<div class="mr-navbar navbar-collapse collapse">
+					<div class="mr-megamenu animate slide" data-duration="400"
+						data-responsive="true">
+						<ul class="nav navbar-nav level0">
+							<li itemprop="name" data-id="435" data-level="1">
+								<a id="index" itemprop="url" class="" href="{{url_for('home.index')}}"data-target="#">
+									首页
+								</a>
+							</li>
+							<li itemprop="name" data-id="510" data-level="1">
+								<!--<a id="jingying" itemprop="url" class="" href="{{url_for('home.goods_list',supercat_id=14)}}" data-target="#">-->
+								<a id="jingying" itemprop="url" class="" href="/goods_list/14?type=14" data-target="#">
+									图书类
+								</a>
+							</li>
+							<li itemprop="name" data-id="510" data-level="1">
+								<a id="wenyi" itemprop="url" class="" href="/goods_list/15?type=15"
+								data-target="#">家电类</a>
+							</li>
+
+							<li itemprop="name" data-id="510" data-level="1">
+								<a id="jiaoyu" itemprop="url" class="" href="/goods_list/16?type=16"
+								data-target="#">服装类</a>
+							</li>
+							<li itemprop="name" data-id="510" data-level="1">
+								<a id="shenghuo" itemprop="url" class="" href="/goods_list/17?type=17"
+								   data-target="#">电子类
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+			<!-- //主导航条 -->
+		</div>
+	</div>
+</header>
+<script>
+	// 获取页面参数
+	function GetString(name) {
+		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");//正则表达式
+		var r = window.location.search.substr(1).match(reg);//获取鼠标点击区域
+		if (r != null)
+			return unescape(r[2]);//返回区域编号
+		return null;
+	}
+	var type = GetString('type');
+	if (type === '14') {
+		var jingying = document.getElementById('jingying');
+		jingying.style.backgroundColor = "#9E2626";
+
+	}
+	if (type === '15') {
+		var wenyi = document.getElementById('wenyi');
+		wenyi.style.backgroundColor = "#9E2626";
+
+	}
+	if (type === '16') {
+		var jiaoyu = document.getElementById('jiaoyu');
+		jiaoyu.style.backgroundColor = "#9E2626";
+
+	}
+	if (type === '17') {
+		var shenghuo = document.getElementById('shenghuo');
+		shenghuo.style.backgroundColor = "#9E2626";
+
+	}
+	if (type == null) {//默认登录无点击
+		var index = document.getElementById('index');
+		index.style.backgroundColor = "#9E2626";
+
+	}
+</script>
+	<!-- //网站头部 -->

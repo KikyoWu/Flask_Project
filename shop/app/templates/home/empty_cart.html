@@ -1,0 +1,30 @@
+{% extends "home/common.html" %}
+{% block content %}
+	<!-- //网站头部 -->
+    <div id="mr-mainbody" class="container mr-mainbody">
+        <div class="row">
+            <!-- 页面主体内容 -->
+            <div id="mr-content" class="mr-content col-xs-12">
+                <div id="mrshop" class="mrshop common-home">
+                    <div class="container_oc">
+                        <div class="container_oc">
+                            <div class="breadcrumb"></div>
+                        </div>
+                        <div class="row">
+                            <div id="content_oc" class="col-sm-12" style="min-height:300px;">
+                                <h1>我的购物车</h1>
+                                <div class="table-responsive cart-info" style="margin-bottom:50px;">您的购物车为空！</div>
+                                <div class="buttons">
+                                    <div class="pull-left">
+                                        <a href="{{url_for('home.index')}}" class="btn btn-primary btn-default">继续购物</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- //页面主体内容 -->
+        </div>
+    </div>
+{% endblock %}

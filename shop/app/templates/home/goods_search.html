@@ -1,0 +1,156 @@
+{% extends "home/common.html" %}
+{% block content %}
+
+    <!-- //网站头部 -->
+    <div id="mr-mainbody" class="container mr-mainbody">
+        <div class="row">
+
+            <!-- 显示搜索到的图书列表 -->
+            <div id="mr-content"
+                class="mr-content col-xs-12 col-sm-12 col-md-9 col-md-push-3">
+
+                <div id="system-message-container" style="display: none;"></div>
+
+                <div id="mrshop" class="mrshop common-home">
+                    <div class="container_oc">
+                        <ul class="breadcrumb">
+                        </ul>
+                        <div class="row">
+                            <div id="content_oc" class="col-sm-12">
+                                <div class="box_oc">
+                                    <div class="box-heading">
+                                        <h1 class="mrshop_heading_h1">搜索结果</h1>
+                                    </div>
+                                    <div class="box-content1">
+                                        <hr>
+                                        <div class="row">
+                                            {% if page_data.items %}
+                                            {% for item in page_data.items %}
+                                            <div class="product-layout product-grid col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                                <div class="product-thumb">
+                                                    <div class="actions">
+                                                        <div class="image">
+                                                            <a href="/goods_detail/{{item.id}}?type={{item.supercat_id}}">
+                                                                <img src="{{url_for('static',filename='images/goods/'+item.picture)}}"
+                                                                class="img-responsive">
+                                                            </a>
+                                                        </div>
+                                                        <div class="button-group btn-grid">
+                                                            <div class="cart">
+                                                                <button class="btn btn-primary btn-primary"
+                                                                    type="button" data-toggle="tooltip"
+                                                                    onclick='javascript:window.location.href="/cart_add?goods_id={{item.id}}&number=1"; '
+                                                                    style="display: none; width: 33.3333%;"
+                                                                    data-original-title="添加到购物车">
+                                                                    <i class="fa fa-shopping-cart"></i>
+                                                                </button>
+                                                            </div>
+                                                            <div class="wishlist">
+                                                                <button class="btn" type="button" data-toggle="tooltip"
+                                                                    title="收藏">
+                                                                    <i class="fa fa-heart"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="caption">
+                                                            <div class="name">
+                                                                <a href="/goods_detail/{{item.id}}?type={{item.supercat_id}}" style="width: 95%">
+                                                                    <span style="color: #0885B1">商品名称：</span>{{item.name}}</a>
+                                                            </div>
+                                                            <p class="price">
+                                                                <span class="price-new">分类：</span> <span>{{item.subcat.cat_name}}</span>
+                                                                <span class="price-tax">价格: {{item.current_price}}元
+                                                                </span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                            {% else %}
+                                                <div style="text-align:center;font-size:16px;color:red">没有插叙到您想要的商品哦！</div>
+                                            {% endif %}
+                                        </div>
+                                        {% if page_data.items %}
+                                        <div class="row pagination">
+                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+												<tr>
+												  <td height="30" align="right">当前页数：[{{page_data.page}}/{{page_data.pages}}]&nbsp;
+													<a href="{{ url_for('home.goods_search',page=1,keywords=keywords) }}">第一页</a>
+													{% if page_data.has_prev %}
+													  <a href="{{ url_for('home.goods_search',page=page_data.prev_num,keywords=keywords) }}">上一页</a>
+													{% endif %}
+													{% if page_data.has_next %}
+												　     <a href="{{ url_for('home.goods_search',page=page_data.next_num,keywords=keywords) }}">下一页</a>
+													{% endif %}　
+													<a href="{{ url_for('home.goods_search',page=page_data.pages,keywords=keywords) }}">最后一页&nbsp;</a>
+												  </td>
+												</tr>
+                                            </table>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- //显示搜索到的图书列表-->
+			<!-- 显示左侧热门商品 -->
+		<div class="mr-sidebar mr-sidebar-left col-xs-12 col-sm-4 col-sm-pull-8 col-md-3 col-md-pull-9  hidden-sm hidden-xs">
+			<div class="mr-module module " id="Mod157">
+				<div class="module-inner">
+					<h3 class="module-title ">
+						<span>热门商品</span>
+					</h3>
+					<div class="module-ct">
+						<div class="mrshop">
+							<div class="container_oc">
+								<div class="box_oc">
+									<div>
+										<div class="box-product product-grid">
+											{% for item in hot_goods %}
+											<div>
+												<div class="image">
+													<a href="/goods_detail/{{item.id}}?type={{item.supercat_id}}"><img
+														src="{{url_for('static',filename='images/goods/'+item.picture)}}" width="80px">
+													</a>
+												</div>
+												<div class="name">
+													<a href="/goods_detail/{{item.id}}?type={{item.supercat_id}}"> {{item.name}}</a>
+												</div>
+												<div class="rating">
+													<span class="fa fa-stack"><i
+														class="fa fa-star fa-stack-2x"></i><i
+														class="fa fa-star-o fa-stack-2x"></i></span> <span
+														class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
+														class="fa fa-star-o fa-stack-2x"></i></span> <span
+														class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
+														class="fa fa-star-o fa-stack-2x"></i></span> <span
+														class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
+														class="fa fa-star-o fa-stack-2x"></i></span> <span
+														class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i
+														class="fa fa-star-o fa-stack-2x"></i></span>
+												</div>
+												<div class="price">{{item.current_price}}元</div>
+											</div>
+											{% endfor %}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+			<!-- // 显示左侧热门商品 -->
+		</div>
+
+        </div>
+    </div>
+    <!-- 版权栏 -->
+{% endblock %}

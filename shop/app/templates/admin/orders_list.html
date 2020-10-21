@@ -1,0 +1,67 @@
+{% extends "admin/common.html" %}
+{% block content %}
+
+<table width="1280" height="288"  border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+  <tr>
+    <td align="center" valign="top">
+        <table width="100%"  border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="right">&nbsp;</td>
+        <td height="10" colspan="3">&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+        <tr>
+            <td align="right">&nbsp;</td>
+            <td height="10" colspan="3">
+                <form action="" method="get" >
+                    <input type="text" placeholder="根据订单号查询" name="keywords" id="orderId" />
+                    <input type="submit" value="查询" />
+                </form>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td height="29" align="right">&nbsp;</td>
+            <td width="10" background="{{url_for('static',filename='admin/images/manage_leftTitle_left.gif')}}">&nbsp;</td>
+            <td width="1089" align="center" background="{{url_for('static',filename='admin/images/manage_leftTitle_mid.gif')}}" class="word_white">
+                <b>订单列表</b>
+            </td>
+            <td width="10" background="{{url_for('static',filename='admin/images/manage_leftTitle_right.gif')}}">&nbsp;</td>
+            <td>&nbsp</td>
+      </tr>
+        <table width="96%" height="48"  border="1" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF" bordercolordark="#CCCCCC" bordercolorlight="#FFFFFF">
+            <tr align="center">
+              <td width="8%" height="30">订单号</td>
+              <td width="10%">收货人</td>
+              <td width="15%">电话</td>
+              <td width="15%">地址</td>
+              <td width="26%">下单日期</td>
+            </tr>
+        {% for v in page_data.items %}
+		<tr align="center">
+		  <td height="24">
+              <a href="{{ url_for('admin.orders_detail',order_id=v.id)}}">{{ v.id }}</a>
+          </td>
+		  <td>{{ v.recevie_name}}</td>
+		  <td>{{ v.recevie_tel}}</td>
+		  <td>{{ v.recevie_address}}</td>
+		  <td>{{ v.addtime}}</td>
+		</tr>
+        {% endfor %}
+      </table>
+        <table width="100%"  border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td height="30" align="right">当前页数：[{{page_data.page}}/{{page_data.pages}}]&nbsp;
+                <a href="{{ url_for('admin.orders_list',page=1) }}">第一页</a>
+                {% if page_data.has_prev %}
+                  <a href="{{ url_for('admin.orders_list',page=page_data.prev_num) }}">上一页</a>
+                {% endif %}
+                {% if page_data.has_next %}
+            　     <a href="{{ url_for('admin.orders_list',page=page_data.next_num) }}">下一页</a>
+                {% endif %}　
+                <a href="{{ url_for('admin.orders_list',page=page_data.pages) }}">最后一页&nbsp;</a>
+              </td>
+            </tr>
+        </table>
+    </td>
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends "admin/common.html" %}
+{% block content %}
+<script>
+$(document).ready(function(){
+	$('#supercat_id').change(function(){
+	    super_id = $(this).children('option:selected').val()
+	    selSubCat(super_id);
+	})
+});
+function selSubCat(val){
+    $.get("{{ url_for('admin.select_sub_cat')}}",
+            {super_id:val},
+            function(result){
+                html_doc = ''
+                if(result.status == 1){
+                　　$.each(result.data,function(idx,obj){
+                        html_doc += '<option value='+obj.id+'>'+obj.cat_name+'</option>'
+                　　});
+                }else{
+                     html_doc += '<option value=0>前选择子类</option>'
+                }
+                $("#subcat_id").html(html_doc); 		//显示获取到的小分类
+    });
+}
+</script>
+<table width="1280" height="288"  border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
+  <tr>
+    <td align="center" valign="top"><table width="100%"  border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="18" height="45" align="right">&nbsp;</td>
+        <td colspan="3" class="tableBorder_B_dashed">
+          <img src="{{url_for('static',filename='admin/images/manage_ico1.GIF')}}" width="11" height="11">&nbsp;
+          <a href="{{url_for('admin.supercat_list')}}"> [大分类信息管理]</a>&nbsp;&nbsp;&nbsp;
+          <img src="{{url_for('static',filename='admin/images/manage_ico2.GIF')}}" width="11" height="11">&nbsp;
+          <a href="{{url_for('admin.subcat_list')}}">[小分类信息管理]</a>&nbsp;&nbsp;&nbsp;
+          <img src="{{url_for('static',filename='admin/images/manage_ico3.GIF')}}" width="12" height="12">&nbsp;
+          <a href="{{url_for('admin.goods_add')}}">[添加商品信息]</a></td>
+        <td width="24">&nbsp;
+        </td>
+      </tr>
+      <tr>
+        <td align="right">&nbsp;</td>
+        <td height="10" colspan="3">&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="29" align="right">&nbsp;</td>
+        <td width="10" background="{{url_for('static',filename='admin/images/manage_leftTitle_left.gif')}}">&nbsp;</td>
+        <td width="1089" align="center" background="{{url_for('static',filename='admin/images/manage_leftTitle_mid.gif')}}" class="word_white"><b>添加商品信息</b></td>
+        <td width="10" background="{{url_for('static',filename='admin/images/manage_leftTitle_right.gif')}}">&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+        <form action="" method="post">
+            <table width="94%"  border="0" align="center" cellpadding="0" cellspacing="0" bordercolordark="#FFFFFF">
+              <tr>
+                <td width="14%" height="27">&nbsp;商品名称：</td>
+                <td height="27" colspan="3">&nbsp;
+                    {{ form.name }}
+                    {% for err in form.name.errors %}
+                        <span  style="float:left;padding-top:10px;color:red">{{ err }}</span>
+                    {% endfor %}
+                </td>
+              </tr>
+              <tr>
+                <td height="27">&nbsp;所属大类：</td>
+                <td width="31%" height="27">&nbsp;
+                    {{ form.supercat_id }}
+                </td>
+                <td width="13%" height="27"> &nbsp;所属小类：</td>
+                <td width="42%" height="27" id="subType">
+                    {{ form.subcat_id }}
+                </td>
+              </tr>
+              <tr>
+                <td height="41">&nbsp;图片文件：</td>
+                <td height="41">&nbsp;
+                    {{ form.picture }}
+                </td>
+                <td height="41">&nbsp;定　　价：</td>
+                <td height="41">
+                    <span style="float:left;">
+                        {{form.original_price}}
+                    </span>
+                    <span  style="float:left;padding-top:10px;">&nbsp;(元)</span>
+                    {% for err in form.original_price.errors %}
+                        <span  style="float:left;padding-top:10px;color:red">{{ err }}</span>
+                    {% endfor %}
+                </td>
+              </tr>
+              <tr>
+                <td height="45">&nbsp;是否新品：</td>
+                <td> {{form.is_new}} </td>
+                <td>&nbsp;是否特价：</td>
+                <td> {{form.is_sale}} </td>
+              </tr>
+              <tr>
+                <td height="103">&nbsp;商品简介：</td>
+                <td colspan="3">
+                    <span class="style5">&nbsp; </span>
+                    {{ form.introduction }}
+                </td>
+              </tr>
+              <tr>
+                <td height="38" colspan="4" align="center">
+                    {{ form.csrf_token }}
+                    {{ form.submit }}
+                </td>
+              </tr>
+            </table>
+          </form>
+    </td>
+{% endblock %}
