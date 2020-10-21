@@ -548,3 +548,4 @@ INSERT INTO `cart` VALUES ('3', '59', '0', '1', '2018-10-31 14:31:48');
 
 [^1]: 使用蓝图可以分为三个步骤:  1,在前台`home.init.py`初始化文件中创建一个蓝图对象`admin``=``Blueprint(``'admin'``,__name__)　`  2,在`init.py`的应用对象上注册这个蓝图对象`app.register_blueprint(admin,url\_prefix``=``'/admin'``)`   3,在前台`home.views.py`路由文件这个蓝图对象上进行操作,注册路由,指定静态文件夹,注册模版过滤器`@admin``.route(``'/'``)``def` `admin_home():``  ``return` `'admin_home'`
 [^2]:1、 `db.ForeignKey('supercat.id')`添加外键，所属关系,可以通过一个子分类查找到对应的大分类（supercat）      2、`db.relationship("Goods", backref='subcat')`添加外键关系关联，包含关系，可以通过子分类找到子分类对应的所有商品
+
