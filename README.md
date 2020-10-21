@@ -69,13 +69,13 @@
 
   - **app:**Flask程序的包名。该文件夹下还有4个包：`home`（前台），`admin`（后台），`static`（静态文件），`template`（模板文件）；app初始化文件`__init__.py`,模型文件`models.py`
 
-    - **home(前台)**：
+    -**home(前台)**：
 
-      - **初始化文件`__init__.py`:**用`home = Blueprint("home",__name__)`定义蓝图，用`import app.home.views`导入前台路由文件
+      -**初始化文件`__init__.py`:**用`home = Blueprint("home",__name__)`定义蓝图，用`import app.home.views`导入前台路由文件
 
-      - **前台表单文件`forms.py`：**验证用户注册表单类RegisterForm，用户登录表单类LoginForm，修改密码表单类PasswordForm。继承自FlaskForm类，定义各个表单中每个字段类型和验证规则，以及字段的相关属性等信息。
+      -**前台表单文件`forms.py`：**验证用户注册表单类RegisterForm，用户登录表单类LoginForm，修改密码表单类PasswordForm。继承自FlaskForm类，定义各个表单中每个字段类型和验证规则，以及字段的相关属性等信息。
 
-      - **路由文件`vews.py`**:
+      -**路由文件`vews.py`**:
 
         1. 设置登录路由`"/login/"`,注册路由`("/register/",`退出登录路由`"/logout/"`,修改密码路由`"/modify_password/"`,首页路由`"/"`，商品列表路由`"/goods_list/<int:supercat_id>/"`，商品详情路由`"/goods_detail/<int:id>/"`,搜索功能路由`"/search/"`,添加购物车路由`"/cart_add/"`,清空购物车路由`"/cart_clear/"`,删除购物车中某个商品路由`"/cart_delete/<int:id>/"`,购物车路由`"/shopping_cart/"`,购物车提交订单路由`"/cart_order/"`,删除某个订单路由`"/order_delete/<int:id>/"`,订单详情路由`"/order_list/"`。<!--路由具体地址不定的地方：需要把一些特定的字段标记成 <variable_name> ，将这些特定的字段将作为参数传入到函数中-->
 
