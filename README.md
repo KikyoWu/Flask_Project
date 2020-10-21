@@ -57,7 +57,7 @@
 
 **购物商场业务流程图：**
 
-![商场业务流程图](https://images.cnblogs.com/cnblogs_com/yffxwyy/1858223/o_201008071039%E5%95%86%E5%9C%BA%E4%B8%9A%E5%8A%A1%E6%B5%81%E7%A8%8B%E5%9B%BE.png)
+<img src="https://images.cnblogs.com/cnblogs_com/yffxwyy/1858223/o_201008071039商场业务流程图.png" class="custom-zoom medium-zoom-image">
 
 ## 3.文件夹组织架构
 
