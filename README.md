@@ -1,2 +1,2 @@
-# Easygui
-easygui相关测试
+# Python
+python相关测试代码
