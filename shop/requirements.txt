@@ -2,7 +2,7 @@ alembic==1.0.1
 asn1crypto==0.24.0
 cffi==1.11.5
 Click==7.0
-cryptography==2.3.1
+cryptography==3.2
 Flask==1.0.2
 Flask-Migrate==2.3.0
 Flask-Script==2.0.6
